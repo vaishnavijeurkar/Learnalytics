@@ -1,0 +1,17 @@
+---
+title: "Analysis Report"
+author: "Vaishnavi Jeurkar"
+date: "2023-11-07"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_knit$set(root.dir = normalizePath('..'))
+```
+
+```{r ProjectTemplate, include=FALSE}
+library(ProjectTemplate)
+load.project()
+```
+
