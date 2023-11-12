@@ -2,8 +2,19 @@
 title: "Analysis Report"
 author: "Vaishnavi Jeurkar"
 date: "2023-11-07"
-output: pdf_document
+output:
+  html_document:
+    df_print: paged
 ---
+
+# Learning Analytics | FutureLearn MOOC Dataset
+
+### Introduction
+The objective of this project is to identify the key determinants of student engagement in the Massive Open Online Course (MOOC) titled "Cyber Security: Safety At Home, Online, and in Life," offered by Newcastle University through the FutureLearn platform. This study leverages raw data collected from seven different runs of the course, utilizing learning analytics techniques to uncover effective measures of student engagement. The insights derived from this analysis hold the potential to inform the course's learning design and facilitate intervention processes for at-risk students. These findings are of paramount importance Newcastle University's course instructors and individuals running similar online courses, as they seek to enhance student success rates and implement targeted marketing strategies. Employing the CRISP-DM framework, this report presents the results of two iterative cycles of data mining, which will serve as a valuable resource for improving the course's effectiveness and promoting it in a manner that aligns with the needs of the target audience.
+
+### Round 1
+### Business Understanding
+
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
@@ -12,6 +23,68 @@ knitr::opts_knit$set(root.dir = normalizePath('..'))
 
 ```{r ProjectTemplate, include=FALSE}
 library(ProjectTemplate)
+library(tidyverse)
 load.project()
+```
+
+```{r}
+step_activity_data = read.csv("data/cyber-security-7_step-activity.csv")
+glimpse(step_activity_data)
+```
+```{r}
+step_activity_data %>%
+  summarize(distinct_points = n_distinct(learner_id))
+#gives total number of learner id
+```
+```{r}
+step_activity_data = step_activity_data %>%
+  mutate(last_completed_at = replace(last_completed_at, last_completed_at ==  "", NA))
+step_activity_data %>%
+  summarise(count = sum(is.na(last_completed_at)))
+#replacing empty strings in last_completed_at column with NA to count the empty values
+```
+```{r}
+#difference in seconds
+
+step_activity_data$time_to_complete = as.numeric(difftime(step_activity_data$last_completed_at, 
+                                                          step_activity_data$first_visited_at, units ="mins"))
+step_activity_data
+```
+
+
+
+```{r}
+data_summary = step_activity_data %>% 
+  group_by(step) %>% 
+  summarize(AvgTimeTaken = mean(time_to_complete/60, na.rm = TRUE), 
+            PercentIncomplete = mean(is.na(time_to_complete)) * 100)
+
+print(data_summary)
+```
+
+
+
+```{r}
+result <- step_activity_data %>%
+  group_by(learner_id) %>%
+  summarize(last_completed_step = max(step, na.rm = TRUE)) %>%
+  arrange(learner_id)
+
+bar_chart <- ggplot(result, aes(x = factor(last_completed_step))) +
+  geom_bar(fill = "skyblue", color = "black") +
+  labs(
+    title = "Student Drop-Out Count by Step",
+    x = "Last Completed Step",
+    y = "Frequency"
+  ) +
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))
+
+# Display the bar chart
+print(bar_chart)
+
+```
+```{r}
+print(data_summary)
 ```
 
