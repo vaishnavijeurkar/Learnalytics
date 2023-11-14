@@ -8,11 +8,10 @@ output: pdf_document
 # Learning Analytics | FutureLearn MOOC Dataset
 
 ### Introduction
-The objective of this project is to identify the key determinants of student engagement in the Massive Open Online Course (MOOC) titled "Cyber Security: Safety At Home, Online, and in Life," offered by Newcastle University through the FutureLearn platform. This study leverages raw data collected from seven different runs of the course, utilizing learning analytics techniques to uncover effective measures of student engagement. The insights derived from this analysis hold the potential to inform the course's learning design and facilitate intervention processes for at-risk students. These findings are of paramount importance Newcastle University's course instructors and individuals running similar online courses, as they seek to enhance student success rates and implement targeted marketing strategies. Employing the CRISP-DM framework, this report presents the results of two iterative cycles of data mining, which will serve as a valuable resource for improving the course's effectiveness and promoting it in a manner that aligns with the needs of the target audience.
+The objective of this project is to identify the key determinants of student success in the Massive Open Online Course (MOOC) titled "Cyber Security: Safety At Home, Online, and in Life," offered by Newcastle University through the FutureLearn platform. This study leverages raw data collected from seven different runs of the course, utilizing learning analytics techniques to uncover effective measures of student engagement. The insights derived from this analysis hold the potential to inform the course's learning design and facilitate intervention processes for at-risk students. These findings will benefit Newcastle University's course instructors and individuals running similar online courses, as they seek to enhance student engagement rates and improve student performance. Employing the CRISP-DM framework, this report presents the results of two iterative cycles of data mining, which will serve as a valuable resource for improving the course's effectiveness and promoting it in a manner that aligns with the needs of the target audience.
 
 ### Round 1
 ### Business Understanding
-
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
@@ -55,23 +54,23 @@ step_activity_data$time_to_complete = as.numeric(difftime(step_activity_data$las
 step_activity_data
 ```
 ```{r}
-boxplot_plot <- ggplot(data = subset(step_activity_data, !is.na(time_to_complete)), 
-                       aes(x = factor(step), y = time_to_complete/60)) +
-  geom_boxplot() +
-  labs(
-    title = "Stepwise Boxplot of Time to Complete",
-    x = "Step",
-    y = "Time to Complete"
-  ) +
-  theme_minimal() +
-  theme(
-    plot.title = element_text(size = 16, hjust = 0.5),
-    axis.text = element_text(size = 6),
-    axis.title = element_text(size = 14),
-  )
-
-# Display the stepwise boxplot
-print(boxplot_plot)
+# boxplot_plot <- ggplot(data = subset(step_activity_data, !is.na(time_to_complete)), 
+#                        aes(x = factor(step), y = time_to_complete/60)) +
+#   geom_boxplot() +
+#   labs(
+#     title = "Stepwise Boxplot of Time to Complete",
+#     x = "Step",
+#     y = "Time to Complete"
+#   ) +
+#   theme_minimal() +
+#   theme(
+#     plot.title = element_text(size = 16, hjust = 0.5),
+#     axis.text = element_text(size = 6),
+#     axis.title = element_text(size = 14),
+#   )
+# 
+# # Display the stepwise boxplot
+# print(boxplot_plot)
 ```
 
 
@@ -117,7 +116,7 @@ result <- step_activity_data %>%
 bar_chart <- ggplot(result, aes(x = factor(last_completed_step))) +
   geom_bar(fill = "skyblue", color = "black") +
   labs(
-    title = "Student Drop-Out Count by Step",
+    title = "Student Drop-Out Count by Step - 7th Run",
     x = "Last Completed Step",
     y = "Frequency"
   ) +
@@ -128,14 +127,99 @@ bar_chart <- ggplot(result, aes(x = factor(last_completed_step))) +
 print(bar_chart)
 
 ```
+Checking for replicability for drop-out count step
+```{r}
+step_activity_data6 = read.csv("data/cyber-security-6_step-activity.csv")
+step_activity_data5 = read.csv("data/cyber-security-5_step-activity.csv")
+step_activity_data4 = read.csv("data/cyber-security-4_step-activity.csv")
+step_activity_data3 = read.csv("data/cyber-security-3_step-activity.csv")
+```
+
+```{r}
+result6 <- step_activity_data6 %>%
+  group_by(learner_id) %>%
+  summarize(last_completed_step = max(step, na.rm = TRUE)) %>%
+  arrange(learner_id)
+
+bar_chart6 <- ggplot(result6, aes(x = factor(last_completed_step))) +
+  geom_bar(fill = "lightgreen", color = "black") +
+  labs(
+    title = "Student Drop-Out Count by Step - 6th Run",
+    x = "Last Completed Step",
+    y = "Frequency"
+  ) +
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))
+
+# Display the bar chart
+
+
+result5 <- step_activity_data5 %>%
+  group_by(learner_id) %>%
+  summarize(last_completed_step = max(step, na.rm = TRUE)) %>%
+  arrange(learner_id)
+
+bar_chart5 <- ggplot(result5, aes(x = factor(last_completed_step))) +
+  geom_bar(fill = "lightpink", color = "black") +
+  labs(
+    title = "Student Drop-Out Count by Step - 5th Run",
+    x = "Last Completed Step",
+    y = "Frequency"
+  ) +
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))
+
+# Display the bar chart
+
+
+result4 <- step_activity_data4 %>%
+  group_by(learner_id) %>%
+  summarize(last_completed_step = max(step, na.rm = TRUE)) %>%
+  arrange(learner_id)
+
+bar_chart4 <- ggplot(result4, aes(x = factor(last_completed_step))) +
+  geom_bar(fill = "lightyellow", color = "black") +
+  labs(
+    title = "Student Drop-Out Count by Step - 4th Run",
+    x = "Last Completed Step",
+    y = "Frequency"
+  ) +
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))
+
+# Display the bar chart
+
+
+result3 <- step_activity_data3 %>%
+  group_by(learner_id) %>%
+  summarize(last_completed_step = max(step, na.rm = TRUE)) %>%
+  arrange(learner_id)
+
+bar_chart3 <- ggplot(result3, aes(x = factor(last_completed_step))) +
+  geom_bar(fill = "lightcyan", color = "black") +
+  labs(
+    title = "Student Drop-Out Count by Step - 3rd Run",
+    x = "Last Completed Step",
+    y = "Frequency"
+  ) +
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))
+
+# Display the bar chart
+ggarrange(bar_chart6, bar_chart5, bar_chart4, bar_chart3, ncol = 2, nrow = 2)
+```
 
 Learner engagement with different types of material
 
 
 ```{r}
 video_stats = read.csv("data/cyber-security-7_video-stats.csv")
+video_stats <- video_stats %>%
+  mutate(step_position = as.character(step_position))
 glimpse(video_stats)
+
 ```
+
 ```{r}
 correlation_result <- video_stats %>%
   summarize(correlation = cor(video_duration, total_views))
@@ -158,15 +242,15 @@ video_stats <- video_stats %>%
 ```{r}
 ggparcoord(data = video_stats,
            columns = 9:15,
-           groupColumn = "title",
+           groupColumn = "step_position",
            showPoints = TRUE,
-           scale = "globalminmax")+
-           scale_x_discrete(guide = guide_axis(n.dodge=3))
+           scale = "globalminmax")
+           #scale_x_discrete(guide = guide_axis(n.dodge=3))
 ```
 ```{r}
 question_response = read.csv("data/cyber-security-7_question-response.csv")
-glimpse(question_response)
 ```
+
 ```{r}
 #remove rows where learner id is null
 question_response <- question_response %>%
@@ -199,27 +283,12 @@ for (comb in combinations) {
     filter(max(step_number) >= comb$step_number) %>%
     pull(learner_id)
   
-  # Filter question_response for correct responses after not completing the steps for the combination
-  correct_response_without_completion <- question_response %>%
-    filter(
-      week_number == comb$week_number,
-      step_number == comb$step_number,
-      !learner_id %in% completed_learners,  # Exclude students who completed steps
-      correct == "true"  # Filter for correct responses
-    )
-  
-  # Number of students with correct responses after not completing the steps for the combination
-  num_students_with_correct_response_without_completion <- correct_response_without_completion %>% nrow()
-  # Store the result in the results list
-  correctIncomplete[[paste("Week", comb$week_number, "Step", comb$step_number)]] <-               
-  num_students_with_correct_response_without_completion
-  
   incorrect_response_with_completion <- question_response %>%
     filter(
       week_number == comb$week_number,
       step_number == comb$step_number,
-      learner_id %in% completed_learners,  # Exclude students who completed steps
-      correct == "false"  # Filter for correct responses
+      learner_id %in% completed_learners,  
+      correct == "false"  # Filter for incorrect responses
     )
   
   num_students_with_incorrect_response_with_completion <- incorrect_response_with_completion %>% nrow()
@@ -230,7 +299,7 @@ for (comb in combinations) {
     filter(
       week_number == comb$week_number,
       step_number == comb$step_number,
-      learner_id %in% completed_learners,  # Exclude students who completed steps
+      learner_id %in% completed_learners, 
       correct == "true"  # Filter for correct responses
     )
   
@@ -238,38 +307,111 @@ for (comb in combinations) {
   
   correctComplete[[paste("Week", comb$week_number, "Step", comb$step_number)]] <- num_students_with_correct_response_with_completion
 }
-print("Students with completed steps but incorrect answers")
-# Print the results
-for (res in incorrectComplete) {
-  print(res)
-}
-
-print("Students with incomplete steps but correct answers")
-# Print the results
-for (res in correctIncomplete) {
-  print(res)
-}
-
-print("Students with completed steps and correct answers")
-# Print the results
-for (res in correctComplete) {
-  print(res)
-}
 
 ```
+
+```{r}
+week = list(1,2,2,3,3)
+step_no = list(8,8,20,11,18)
+do.call(rbind, Map(data.frame, week = week, step_number = step_no, correct_complete = correctComplete,
+                    incorrect_complete = incorrectComplete))
+
+```
+
 ```{r}
 result <- question_response %>%
   group_by(learner_id, quiz_question) %>%
   summarise(total_true = sum(correct == "true"),
             total_false = sum(correct == "false"))
 
-avg_attempts = result %>%
+attempts = result %>%
   group_by(quiz_question) %>%
-  summarise(max(total_false),
-            sum(total_false))
+  summarise(AvgWrongAttempts = mean(total_false),
+            totalWrongAttempts = sum(total_false),
+            totalStudents = n_distinct(learner_id),
+            students_correct_first_attempt =sum(total_true == 1 & total_false == 0))
+
+
 
 # Print the result
-print(avg_attempts)
+#print(result)
+print(attempts)
+# print(result)
+```
+```{r}
+ggplot(attempts, aes(x = quiz_question, group = 1)) +
+  geom_line(aes(y = totalWrongAttempts, color = "totalWrongAttempts"), size = 1) +
+  geom_line(aes(y = totalStudents, color = "totalStudents"), size = 1) +
+  geom_point(aes(y = totalWrongAttempts, color = "totalWrongAttempts"), size = 3) +
+  geom_line(aes(y = students_correct_first_attempt, color = "students_correct_first_attempt"), size = 1) +
+  geom_point(aes(y = students_correct_first_attempt, color = "students_correct_first_attempt"), size = 3) +
+  geom_point(aes(y = totalStudents, color = "totalStudents"), size = 3) +
+  ylab('Values') +
+  xlab('quiz_question') +
+   scale_x_discrete(guide = guide_axis(n.dodge=3))+
+  scale_color_manual(values = c("totalWrongAttempts" = "lightpink", "totalStudents" = "lightblue", "students_correct_first_attempt" = "lightgreen")) +
+  labs(color = "Legend") +
+  theme_minimal()
+```
+check difficulty level across questions using AvgWrongAttempts variable for different runs.
+```{r}
+question_response6 = read.csv("data/cyber-security-6_question-response.csv")
+question_response5 = read.csv("data/cyber-security-5_question-response.csv")
+question_response4 = read.csv("data/cyber-security-4_question-response.csv")
+```
+
+```{r}
+result6 <- question_response6 %>%
+  group_by(learner_id, quiz_question) %>%
+  summarise(total_true = sum(correct == "true"),
+            total_false = sum(correct == "false"))
+
+attempts6 = result6 %>%
+  group_by(quiz_question) %>%
+  summarise(AvgWrongAttempts6 = mean(total_false))
+
+result5 <- question_response5 %>%
+  group_by(learner_id, quiz_question) %>%
+  summarise(total_true = sum(correct == "true"),
+            total_false = sum(correct == "false"))
+
+attempts5 = result5 %>%
+  group_by(quiz_question) %>%
+  summarise(AvgWrongAttempts5 = mean(total_false))
+
+result4 <- question_response4 %>%
+  group_by(learner_id, quiz_question) %>%
+  summarise(total_true = sum(correct == "true"),
+            total_false = sum(correct == "false"))
+
+attempts4 = result4 %>%
+  group_by(quiz_question) %>%
+  summarise(AvgWrongAttempts4 = mean(total_false))
+
+result_df <- attempts %>%
+  left_join(attempts4, by = "quiz_question") %>%
+  left_join(attempts5, by = "quiz_question") %>%
+  left_join(attempts6, by = "quiz_question")
+
+# Print the result data frame
+print(result_df)
+```
+```{r}
+ggplot(result_df, aes(x = quiz_question, group = 1)) +
+  geom_line(aes(y = AvgWrongAttempts, color = "AvgWrongAttempts"), size = 1) +
+  geom_point(aes(y = AvgWrongAttempts, color = "AvgWrongAttempts"), size = 3) +
+  geom_line(aes(y = AvgWrongAttempts4, color = "AvgWrongAttempts4"), size = 1) +
+  geom_point(aes(y = AvgWrongAttempts4, color = "AvgWrongAttempts4"), size = 3) +
+  geom_line(aes(y = AvgWrongAttempts5, color = "AvgWrongAttempts5"), size = 1) +
+  geom_point(aes(y = AvgWrongAttempts5, color = "AvgWrongAttempts5"), size = 3) +
+  geom_line(aes(y = AvgWrongAttempts6, color = "AvgWrongAttempts6"), size = 1) +
+  geom_point(aes(y = AvgWrongAttempts6, color = "AvgWrongAttempts6"), size = 3) +
+  ylab('Values') +
+  xlab('quiz_question') +
+   scale_x_discrete(guide = guide_axis(n.dodge=3))+
+  scale_color_manual(values = c("AvgWrongAttempts" = "lightsalmon", "AvgWrongAttempts4" = "lightseagreen", "AvgWrongAttempts5" = "lightgoldenrod", "AvgWrongAttempts6" = "lightcoral")) +
+  labs(color = "Legend") +
+  theme_minimal()
 ```
 
 
