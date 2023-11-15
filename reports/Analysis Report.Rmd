@@ -2,19 +2,95 @@
 title: "Analysis Report"
 author: "Vaishnavi Jeurkar"
 date: "2023-11-07"
-output: pdf_document
+output:
+  html_document:
+    df_print: paged
 ---
 
 # Learning Analytics | FutureLearn MOOC Dataset
 
-### Introduction
+## Introduction
 The objective of this project is to identify the key determinants of student success in the Massive Open Online Course (MOOC) titled "Cyber Security: Safety At Home, Online, and in Life," offered by Newcastle University through the FutureLearn platform. This study leverages raw data collected from seven different runs of the course, utilizing learning analytics techniques to uncover effective measures of student engagement. The insights derived from this analysis hold the potential to inform the course's learning design and facilitate intervention processes for at-risk students. These findings will benefit Newcastle University's course instructors and individuals running similar online courses, as they seek to enhance student engagement rates and improve student performance. Employing the CRISP-DM framework, this report presents the results of two iterative cycles of data mining, which will serve as a valuable resource for improving the course's effectiveness and promoting it in a manner that aligns with the needs of the target audience.
 
-### Round 1
-### Business Understanding
+## Round 1
 
+### 1. Business Understanding
+The first phase of the cycle is to identify key stakeholders, define clear business objectives and success criteria.
+
+#### 1.1 Background
+The integration of Learning Analytics into the cybersecurity MOOC by Newcastle University is a strategic initiative aimed at optimizing the learning environment. Learning Analytics, a key facet of Data Science, involves the systematic measurement, analysis, and reporting of learner data to enhance educational outcomes.  
+
+Traditional methods, like attendance monitoring, often fall short in capturing nuanced online engagement. By employing the CRISP-DM methodology, this initiative unifies diverse data sources—ranging from on-campus facility usage to VLE interactions. The goal is to provide instructors and course designers with actionable insights for informed decision-making, intervention strategies, and ongoing course refinement. This approach reflects a commitment to data-driven innovation and continual improvement in online education.
+
+#### 1.2 Business Objective
+The primary objective of this learning analytics project is to leverage data science methodologies for the FutureLearn MOOC Cybersecurity course. The goal is to measure, collect, analyze, and report data about learners and their contexts. By understanding and optimizing the learning experience and the course environment, the insights derived from the data will inform enhancements and improvements to the educational platform.
+
+#### 1.3 Success Criteria
+The success of this learning analytics initiative lies in the precise and accurate utilization of data science methodologies to enhance the FutureLearn MOOC Cybersecurity course. The results should be not only relevant to stakeholders but also easily accessible and interpretable, fostering informed decision-making. The success criteria encompass ensuring data accuracy, relevance to stakeholders, accessibility and interpretability of results, applicability to learning enhancement, and the ability to inform strategic decisions for optimizing the online learning environment. Ultimately, success will be measured by the project's capacity to deliver actionable insights that contribute to the continuous improvement of the course and positively impact the learning experience.
+
+#### 1.4 Research Question
+#### "Can we identify the patterns of student engagement in the course?"
+
+#### 1.5 Inventory of Resources
+
+Dataset: Data is made available from 7 runs of a massive open online course (MOOC) entitled “Cyber Security: Safety At Home, Online, and in Life”. The 7 sets of raw data contains information on learners as they progressed through the course and some details on their profile.  
+
+Course Overview: The seven course overview files describe course content and content type of each run.
+
+#### 1.6 Constraints
+The primary constraint for this deliverable is time, as the analysis is conducted within a tight 2-week timeframe, limiting the in-depth exploration of the business intricacies.  
+
+#### 1.7 Data Mining 
+The goal is to identify hidden patterns or trends within the data that are not immediately apparent. The detailed examination aims to uncover patterns and trends in student learning, enabling the identification of successful teaching strategies and potential areas for improvement. By leveraging data-driven insights, the course analytics not only enhance the overall learning experience for students but also empower course designers and instructors to refine content, assessments, and interventions. The success is defined by the ability to unearth actionable knowledge and insights that can be translated into meaningful business strategies, improvements, or innovations.
+
+#### 1.8 Initial Assessment of tools and techniques
+Following tools showcase a robust and well rounded approach to data analysis,  
+
+1. GitHub:  
+Strengths: GitHub is an excellent version control system that enables collaboration, tracks changes, and provides a centralized repository for code and documentation.  
+Opportunities: Ensure consistent and descriptive commit messages.  
+
+2. Project Template in R:  
+Strengths: Utilizing a project template in R promotes organization, reproducibility, and efficient collaboration. It establishes a standardized structure for your project.  
+Opportunities: Ensure that the project template aligns with best practices and is adaptable to changing project requirements.  
+
+3. ggplot, Tidyverse, dplyr:  
+Strengths: These R packages, especially ggplot and dplyr from the Tidyverse, offer powerful tools for data visualization and manipulation. They support a clean and efficient coding style.  
+Opportunities: Stay updated with the latest versions, explore advanced features, and consider incorporating additional Tidyverse packages as needed.  
+
+4. CRISP-DM (Cross-Industry Standard Process for Data Mining):  
+Strengths: Following the CRISP-DM framework demonstrates a structured approach to data mining, ensuring that the project progresses through well-defined phases.  
+Opportunities: Regularly review and adapt the CRISP-DM process to suit the evolving needs of the project. Emphasize clear communication and documentation.  
+
+### 2. Data Understanding
+This phase encompasses the comprehensive documentation of data collection, description, and exploration. It involves providing commentary on the quality of the data, shedding light on its strengths, limitations, and overall reliability.
+
+#### 2.1 Data collection
+Raw data is collected from the 7 course runs of a massive open online course (MOOC) entitled “Cyber Security: Safety At Home, Online, and in Life” made by Newcastle University. This data has information on characteristic information on profiles of every learner and steps of how they progressed through the course.
+
+#### 2.2 Data Files Description
+Following Data files can be viewed in the course runs.   
+1. Archetype Survey Response: This file contains the learner id's and their Archetypes.   
+2. Enrollments: The file consists of profile information of every learner id along with the enrollment and un-enrollment time stamps.  
+3. Leaving Survey Response: This datafile captures the leaving reasons and step activity of learners who unenrolled from the course.  
+4. Question Response: This file contains the performance data of each student with the quiz content by storing their responses and attempts to solve each question. 
+5. Step Activity: This datafile consists of the first visited and last completed time stamps of each activity that the learner's have visited.
+6. Team Members: This file has details on the team members and their contribution to the course.  
+7. Video Stats: Video stats file has information on the video content of the course. It has details like video duration, total views, downloads, views by percentage and total viewers on each device or demographic. 
+8. Weekly Sentiment Survey: The file captures comments and ratings of different learners for each week of the course.
+
+#### 2.3 Data Exploration
+We want to understand how students engage with the course. Whether it's reading articles, watching videos, or taking quizzes, students move through the course in steps. We're trying to find out if there are any patterns in how students complete these steps. In my initial look at the data, there are some files that have information about students and instructors, but they don't help us with our main question. Some files, like Enrollments Data and Leaving Survey Response, have missing or unknown information. Also, not all files are available for every course run. For example, the Weekly Sentiment Survey file is only there for the 6th and 7th runs of the course.
+
+#### 2.4 Data Quality
+After exploring the data in detail, I identified potential data quality issues. This initial screening ensured no time was wasted on datafiles that are incomplete and do not meet the scope of our objective, providing an approach to verify the feasibility of its use and the ability to answer our defined question.  
+The enrollments data tells us when the user has enrolled or unenrolled in the course which would have been helpful to identify the dropout rate of the course but after inspecting further it is seen that it has many null entries for the unenrolled time stamp. For this reason I will not be using this file for analysis. The incomplete data of Archetype survey response, Weekly sentiment survey response and Leaving survey response makes it difficult to draw reliable insights from them. The only files with substantial amount of data are Step activity, Video stats and question response data. Step activity data provides a comprehensive overview of how learners progress through the steps and hence I will be using this file to observe the student engagement patterns in the course.
+
+### 3. Data Preparation
+Before moving forward to the next phase, I revisit the business understanding stage to incorporate insights gained during the data understanding phase. Specifically, I can provide additional comments regarding assumptions and constraints related to the chosen dataset and the exploratory analysis conducted. This ensures that our data mining process is aligned with a comprehensive understanding of the business context and any limitations associated with the data at hand.
+"C:\Users\VAISHNAVI\Desktop\Futurelearn_mooc_data_analysis_project\Futurelearn"
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_chunk$set(echo = FALSE)
 knitr::opts_knit$set(root.dir = normalizePath('..'))
 ```
 
@@ -27,65 +103,30 @@ library(ggplot2)
 library(ggridges)
 library(fmsb)
 library(GGally)
+
 load.project()
 ```
 
+#### 3.1 Data Selection, Assumptions and Constraints.
+For this phase of the analysis, I have chosen to focus on the step activity file. This particular file provides a detailed overview of the timelines for each learner, indicating when they initiated and completed specific steps throughout the course.  
+Following features are extracted from the file:
+
 ```{r}
-step_activity_data = read.csv("data/cyber-security-7_step-activity.csv")
 glimpse(step_activity_data)
 ```
-```{r}
-step_activity_data %>%
-  summarize(distinct_points = n_distinct(learner_id))
-#gives total number of learner id
-```
-```{r}
-step_activity_data = step_activity_data %>%
-  mutate(last_completed_at = replace(last_completed_at, last_completed_at ==  "", NA))
-step_activity_data %>%
-  summarise(count = sum(is.na(last_completed_at)))
-#replacing empty strings in last_completed_at column with NA to count the empty values
-```
-```{r}
-#difference in seconds
+Given the presence of null values in the "last completed at" feature, we operate under the assumption that these null values signify instances where learners did not complete the corresponding step. Leveraging this assumption, we can identify the steps where the majority of learners have left the course incomplete.  
+Upon delving into data availability during the second stage, it's evident that incomplete data presents a constraint. Certain data files are not consistently present in every course run, introducing variability across runs and complicating a comprehensive analysis of the entire dataset. The data collected in the 7th run of the course is well-structured with no missing or blank files. Given the recentness of this data, the majority of my analysis will be focused on the 7th run of the course.
 
-step_activity_data$time_to_complete = as.numeric(difftime(step_activity_data$last_completed_at, 
-                                                          step_activity_data$first_visited_at, units ="mins"))
-step_activity_data
-```
-```{r}
-# boxplot_plot <- ggplot(data = subset(step_activity_data, !is.na(time_to_complete)), 
-#                        aes(x = factor(step), y = time_to_complete/60)) +
-#   geom_boxplot() +
-#   labs(
-#     title = "Stepwise Boxplot of Time to Complete",
-#     x = "Step",
-#     y = "Time to Complete"
-#   ) +
-#   theme_minimal() +
-#   theme(
-#     plot.title = element_text(size = 16, hjust = 0.5),
-#     axis.text = element_text(size = 6),
-#     axis.title = element_text(size = 14),
-#   )
-# 
-# # Display the stepwise boxplot
-# print(boxplot_plot)
-```
+#### 3.2 Data Construction and Formatting
+The dataset contains step activity data for 1626 learners, with multiple recorded steps for each learner ID. The only column with null values is 'last_completed_at,' which is crucial for determining incomplete steps. As these null values are needed for analyzing incomplete steps, no data cleaning is required. There are a total of 3204 null string values in the 'last_completed_at' column, which have been replaced by 'NA' for consistency. By calculating the difference between timestamps, the 'time_to_complete' column is derived, representing the time taken to complete each step in minutes. 'AvgTimeTaken' denotes the average time taken by all learners to complete a specific step. 'PercentIncomplete' indicates the percentage of learners who left a step incomplete. The 'result' variable captures the value of the last completed step number for each learner_id.  
 
+### 4. Modelling.
 
+Upon concluding the data preparation phase, I revisited the earlier stages to verify adherence to the initial plan and assess potential impacts on the upcoming analysis. Finding no deviations or issues, I proceeded to complete the  exploratory data analysis to answer our question - "Can we identify the patterns of student engagement in the course?"
 
-```{r}
-data_summary = step_activity_data %>% 
-  group_by(step_number, week_number) %>% 
-  summarize(AvgTimeTaken = mean(time_to_complete/60, na.rm = TRUE), 
-            PercentIncomplete = mean(is.na(time_to_complete)) * 100)
+#### 4.1 Average time taken by student to complete the steps in each week.
 
-```
-```{r}
-myPalette <- colorRampPalette(rev(brewer.pal(11, "Spectral")))
-sc <- scale_colour_gradientn(colours = myPalette(100), limits=c(1, 3))
-
+```{r, }
 ggdotchart(
   data_summary, x = "step_number", y = "AvgTimeTaken", 
   group = "week_number", color="week_number",
@@ -93,10 +134,13 @@ ggdotchart(
   sorting = "none"
   ) +  scale_colour_gradientn(guide = 'colourbar', colours = brewer.pal(n = 3, name = 'Set1'))
 ```
-```{r}
-myPalette <- colorRampPalette(rev(brewer.pal(11, "Spectral")))
-sc <- scale_colour_gradientn(colours = myPalette(100), limits=c(1, 3))
 
+The analysis reveals interesting patterns in student behavior. Notably, students invest significant time in completing the initial step, the welcome video. Subsequent steps in the first week also exhibit longer completion times, possibly indicating a lower level of focus at the beginning of the course. As students progress, the steps in Week 2 show a decrease in completion time, reflecting growing interest and consistency in the learning process. Week 3 steps, on the other hand, demonstrate the shortest completion times, suggesting a heightened level of engagement. It's worth noting a spike in average time for step 18 in Week 3, possibly attributed to the increased difficulty of this particular quiz.
+
+#### 4.2 Percentage of students who left the step incomplete.
+
+
+```{r}
 ggdotchart(
   data_summary, x = "step_number", y = "PercentIncomplete", 
   group = "week_number", color="week_number",
@@ -105,14 +149,12 @@ ggdotchart(
   ) +  scale_colour_gradientn(guide = 'colourbar', colours = brewer.pal(n = 3, name = 'Set1'))
 ```
 
+The visual representation illustrates a notable trend wherein a significant proportion of students leave the first-week steps incomplete. Approximately 37% of students do not engage with the welcome video, and over 15% do not complete steps 2 to 5 in Week 1. Notably, steps involving quizzes, such as 1.8, 2.8, 2.20, 3.11, and 3.18, exhibit an increased percentage of incompletion. This pattern suggests that students may encounter challenges in solving these quizzes or have a lower level of interest in these particular activities.
 
+
+#### 4.3 Calculating the student drop-out rate
 
 ```{r}
-result <- step_activity_data %>%
-  group_by(learner_id) %>%
-  summarize(last_completed_step = max(step, na.rm = TRUE)) %>%
-  arrange(learner_id)
-
 bar_chart <- ggplot(result, aes(x = factor(last_completed_step))) +
   geom_bar(fill = "skyblue", color = "black") +
   labs(
@@ -127,89 +169,61 @@ bar_chart <- ggplot(result, aes(x = factor(last_completed_step))) +
 print(bar_chart)
 
 ```
-Checking for replicability for drop-out count step
-```{r}
-step_activity_data6 = read.csv("data/cyber-security-6_step-activity.csv")
-step_activity_data5 = read.csv("data/cyber-security-5_step-activity.csv")
-step_activity_data4 = read.csv("data/cyber-security-4_step-activity.csv")
-step_activity_data3 = read.csv("data/cyber-security-3_step-activity.csv")
-```
+
+The analysis of the last completed step for each learner reveals interesting insights into the course engagement and attrition patterns. Notably, over 400 students exit the course immediately after the introduction video, indicating potential disinterest or a lack of engagement in the initial content. The dropout rates peak during the early steps, particularly from 1.1 to 1.5, suggesting a need for enhancing the appeal and engagement of these introductory sections.
+
+A significant dropout point occurs at step 1.9, following the completion of the quiz at step 1.8. This could be attributed to the quiz's difficulty level, emphasizing the importance of assessing and adjusting the challenge posed by assessments. A similar trend is observed at step 2.9, aligning with the challenging quiz at step 2.8.
+
+The overall completion to the last step (3.20) is relatively low, with approximately 300 students discontinuing the course by step 3.9. This insight underscores the importance of continuous improvement strategies to enhance course content, quizzes, and overall engagement throughout the learning journey.
+
+
+#### 4.4 Checking for replicability for drop-out count rate
 
 ```{r}
-result6 <- step_activity_data6 %>%
-  group_by(learner_id) %>%
-  summarize(last_completed_step = max(step, na.rm = TRUE)) %>%
-  arrange(learner_id)
+library(ggplot2)
+library(ggpubr)
 
-bar_chart6 <- ggplot(result6, aes(x = factor(last_completed_step))) +
-  geom_bar(fill = "lightgreen", color = "black") +
-  labs(
-    title = "Student Drop-Out Count by Step - 6th Run",
-    x = "Last Completed Step",
-    y = "Frequency"
-  ) +
-  theme_minimal() +
-  theme(axis.text.x = element_text(angle = 45, hjust = 1))
+# Function to create a bar chart
+create_bar_chart <- function(data, title, fill_color) {
+  result <- data %>%
+    group_by(learner_id) %>%
+    summarize(last_completed_step = max(step, na.rm = TRUE)) %>%
+    arrange(learner_id)
+  
+  bar_chart <- ggplot(result, aes(x = factor(last_completed_step))) +
+    geom_bar(fill = fill_color, color = "black") +
+    labs(
+      title = title,
+      x = "Last Completed Step",
+      y = "Frequency"
+    ) +
+    theme_minimal() +
+    theme(axis.text.x = element_blank())
+  
+  return(bar_chart)
+}
 
-# Display the bar chart
+# Create bar charts for each run
+bar_chart6 <- create_bar_chart(step_activity_data6, "Student Drop-Out Count by Step - 6th Run", "lightgreen")
+bar_chart5 <- create_bar_chart(step_activity_data5, "Student Drop-Out Count by Step - 5th Run", "lightpink")
+bar_chart4 <- create_bar_chart(step_activity_data4, "Student Drop-Out Count by Step - 4th Run", "lightyellow")
+bar_chart3 <- create_bar_chart(step_activity_data3, "Student Drop-Out Count by Step - 3rd Run", "lightcyan")
 
-
-result5 <- step_activity_data5 %>%
-  group_by(learner_id) %>%
-  summarize(last_completed_step = max(step, na.rm = TRUE)) %>%
-  arrange(learner_id)
-
-bar_chart5 <- ggplot(result5, aes(x = factor(last_completed_step))) +
-  geom_bar(fill = "lightpink", color = "black") +
-  labs(
-    title = "Student Drop-Out Count by Step - 5th Run",
-    x = "Last Completed Step",
-    y = "Frequency"
-  ) +
-  theme_minimal() +
-  theme(axis.text.x = element_text(angle = 45, hjust = 1))
-
-# Display the bar chart
-
-
-result4 <- step_activity_data4 %>%
-  group_by(learner_id) %>%
-  summarize(last_completed_step = max(step, na.rm = TRUE)) %>%
-  arrange(learner_id)
-
-bar_chart4 <- ggplot(result4, aes(x = factor(last_completed_step))) +
-  geom_bar(fill = "lightyellow", color = "black") +
-  labs(
-    title = "Student Drop-Out Count by Step - 4th Run",
-    x = "Last Completed Step",
-    y = "Frequency"
-  ) +
-  theme_minimal() +
-  theme(axis.text.x = element_text(angle = 45, hjust = 1))
-
-# Display the bar chart
-
-
-result3 <- step_activity_data3 %>%
-  group_by(learner_id) %>%
-  summarize(last_completed_step = max(step, na.rm = TRUE)) %>%
-  arrange(learner_id)
-
-bar_chart3 <- ggplot(result3, aes(x = factor(last_completed_step))) +
-  geom_bar(fill = "lightcyan", color = "black") +
-  labs(
-    title = "Student Drop-Out Count by Step - 3rd Run",
-    x = "Last Completed Step",
-    y = "Frequency"
-  ) +
-  theme_minimal() +
-  theme(axis.text.x = element_text(angle = 45, hjust = 1))
-
-# Display the bar chart
+# Display the bar charts
 ggarrange(bar_chart6, bar_chart5, bar_chart4, bar_chart3, ncol = 2, nrow = 2)
+
 ```
 
-Learner engagement with different types of material
+The depicted plot illustrates the frequency of the last completed step for four different course runs (Run 3, 4, 5, and 6). A notable observation is the consistency in dropout patterns across all four runs, despite variations in the enrolled student numbers. This uniformity in dropout trends suggests that the issue is not solely influenced by the course size but rather indicates a need for a comprehensive revision of course content.
+
+### 5. Evaluation
+In this conclusive phase, the analysis of the FutureLearn cybersecurity course data has successfully met the defined business objectives and success criteria. It has delivered valuable insights into student engagement patterns, dropout tendencies, and areas for potential improvement. By exploring last completed steps, average time taken, and completion percentages based on week and step, a comprehensive understanding of learner behaviors has been achieved. The visualizations have proven effective in communicating these insights, although there's room for refinement in specific graphical representations. Despite challenges like incomplete data and variations across course runs, the overall quality of the dataset has been sufficient to capture general trends. Looking ahead, the plan is to conduct an in-depth analysis of student engagement and performance with different types of course material, aiming to gain further insights into the factors influencing student dropout rates and varying levels of engagement.
+
+
+## Round 2
+
+### 1. Business Understanding
+
 
 
 ```{r}
@@ -270,9 +284,7 @@ combinations <- list(
 )
 
 # Initialize an empty list to store the results
-correctIncomplete <- list()
-incorrectComplete <- list()
-correctComplete <- list()
+results <- list()
 
 # Iterate through the combinations and filter the data
 for (comb in combinations) {
@@ -281,7 +293,7 @@ for (comb in combinations) {
     filter(week_number == comb$week_number) %>%
     group_by(learner_id) %>%
     filter(max(step_number) >= comb$step_number) %>%
-    pull(learner_id)
+    pull(learner_id) 
   
   incorrect_response_with_completion <- question_response %>%
     filter(
@@ -291,9 +303,7 @@ for (comb in combinations) {
       correct == "false"  # Filter for incorrect responses
     )
   
-  num_students_with_incorrect_response_with_completion <- incorrect_response_with_completion %>% nrow()
-  
-  incorrectComplete[[paste("Week", comb$week_number, "Step", comb$step_number)]] <- num_students_with_incorrect_response_with_completion
+  num_students_with_incorrect_response_with_completion <- n_distinct(incorrect_response_with_completion$learner_id)
   
   correct_response_with_completion <- question_response %>%
     filter(
@@ -303,18 +313,22 @@ for (comb in combinations) {
       correct == "true"  # Filter for correct responses
     )
   
-  num_students_with_correct_response_with_completion <- correct_response_with_completion %>% nrow()
+  num_students_with_correct_response_with_completion <- n_distinct(correct_response_with_completion$learner_id)
   
-  correctComplete[[paste("Week", comb$week_number, "Step", comb$step_number)]] <- num_students_with_correct_response_with_completion
+  # Store the result in the results list
+  results[[paste("Week", comb$week_number, "Step", comb$step_number)]] <- data.frame(
+    week = comb$week_number,
+    step_number = comb$step_number,
+    correct_complete = num_students_with_correct_response_with_completion,
+    incorrect_complete = num_students_with_incorrect_response_with_completion
+  )
 }
 
-```
+# Combine the results into a single data frame
+result_df <- do.call(rbind, results)
 
-```{r}
-week = list(1,2,2,3,3)
-step_no = list(8,8,20,11,18)
-do.call(rbind, Map(data.frame, week = week, step_number = step_no, correct_complete = correctComplete,
-                    incorrect_complete = incorrectComplete))
+# Print the final data frame
+print(result_df)
 
 ```
 
