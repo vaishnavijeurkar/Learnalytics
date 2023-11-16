@@ -1,0 +1,41 @@
+commit 56649c07c2bb4f8047b7243738bf2a893117e11a
+Author: Vaishnavi_Jeurkar <jeurkarvaishnavi510@gmail.com>
+Date:   Thu Nov 16 19:48:24 2023 +0000
+
+    First draft of report
+
+commit ce8f712a351724771210d747e63c8e7118ef166b
+Author: Vaishnavi_Jeurkar <jeurkarvaishnavi510@gmail.com>
+Date:   Wed Nov 15 22:20:18 2023 +0000
+
+    report of cycle 1
+
+commit 4018d61db2f42e02c9b512182c410eef51779bf1
+Author: Vaishnavi_Jeurkar <jeurkarvaishnavi510@gmail.com>
+Date:   Tue Nov 14 09:58:37 2023 +0000
+
+    Replicability plots
+
+commit 24145b1a65f723c81a72e2726019b4ace6b625fb
+Author: Vaishnavi_Jeurkar <jeurkarvaishnavi510@gmail.com>
+Date:   Mon Nov 13 20:29:50 2023 +0000
+
+    EDA for cycle 2"
+
+commit 49c0caeef3135e50424c8ba0c7b7520206fb6885
+Author: Vaishnavi_Jeurkar <jeurkarvaishnavi510@gmail.com>
+Date:   Sun Nov 12 23:52:50 2023 +0000
+
+    EDA for cycle 1
+
+commit 179ea2f00144ba6ce9814f67cb2465cca96c7032
+Author: Vaishnavi_Jeurkar <jeurkarvaishnavi510@gmail.com>
+Date:   Tue Nov 7 12:51:39 2023 +0000
+
+    Add Data Files
+
+commit 7c15ea260011b0870bc0eb75cdec06d9db95c614
+Author: Vaishnavi_Jeurkar <jeurkarvaishnavi510@gmail.com>
+Date:   Tue Nov 7 12:20:58 2023 +0000
+
+    Set up project Template"
