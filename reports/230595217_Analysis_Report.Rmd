@@ -57,8 +57,8 @@ The goal is to identify hidden patterns or trends within the data that are not i
 
 Following tools showcase a robust and well rounded approach to data analysis,  
 
-1. GitHub:  
-Strengths: GitHub is an excellent version control system that enables collaboration, tracks changes, and provides a centralized repository for code and documentation.  
+1. Git:  
+Strengths: Git is an excellent version control system that enables collaboration, tracks changes, and provides a centralized repository for code and documentation.  
 Opportunities: Ensure consistent and descriptive commit messages.  
 
 2. Project Template in R:  
@@ -114,13 +114,10 @@ knitr::opts_knit$set(root.dir = normalizePath('..'))
 ```{r ProjectTemplate, include=FALSE}
 library(ProjectTemplate)
 library(tidyverse)
-library("RColorBrewer")
-library(ggpubr)
 library(ggplot2)
-library(ggridges)
-library(fmsb)
+library(ggpubr)
 library(GGally)
-
+library("RColorBrewer")
 load.project()
 ```
 
